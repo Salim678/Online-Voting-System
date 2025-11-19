@@ -1,7 +1,5 @@
 🗳️ Online Voting System – Java Web Application
 
-📌 Overview
-
 The Online Voting System is a Java web application that enables registered voters to securely log in and cast their votes. Each voter is allowed to vote only one time, ensuring fairness.
 An admin user can add candidates and view real-time voting results.
 
@@ -19,31 +17,35 @@ This project is built according to the Java Web-Based Project Review Rubric, cov
 
 ▫️System Design Diagrams
 
-📌 Features
+⭐ Features
 
-👤 Voter
+👤 Voter Module
 
-▫️Register
+▫️Online voter registration
 
-▫️Log in
+▫️Secure login system
+
+▫️One-voter-one-vote enforcement
 
 ▫️View candidate list
 
-▫️Vote (only once)
+▫️Cast vote
 
-▫️Log out
+▫️View voting confirmation
 
-🛠️ Admin
+🛠️ Admin Module
 
-▫️Log in
+▫️ Admin login
 
-▫️Add/View candidates
+▫️Add, update, delete, view candidates
+
+▫️View total votes for each candidate
 
 ▫️View election results
 
-📌 Tech Stack
+💻 Technologies Used
 
-▫️Java (JDK 8/11/17)
+▫️Java
 
 ▫️JSP & Servlets
 
@@ -51,7 +53,7 @@ This project is built according to the Java Web-Based Project Review Rubric, cov
 
 ▫️MySQL
 
-▫️Apache Tomcat
+▫️Tomcat Server
 
 ▫️HTML/CSS
 
