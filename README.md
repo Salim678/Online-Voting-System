@@ -92,3 +92,13 @@ Each table is structured to support secure login, one-time voting, and candidate
  ▫️Vote Page
 
  ▫️Admin Dashboard
+
+ 📊 General
+
+  Automatically prevents double-voting
+
+  Simple result page (vote count per candidate)
+
+  MySQL integration using JDBC
+
+  Follows MVC pattern (Model → DAO → Servlet → JSP)
