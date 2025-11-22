@@ -1,26 +1,32 @@
+package web;
 
-package com.voting.servlet;
-
-import com.voting.dao.VoterDAO;
-import com.voting.model.Voter;
-
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import model.Voter;
+import service.AuthService;
 
 public class LoginServlet extends HttpServlet {
 
-    protected void doPost(jakarta.servlet.http.HttpServletRequest req, jakarta.servlet.http.HttpServletResponse resp) throws ServletException, IOException {
+    private AuthService authService = new AuthService();
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        VoterDAO dao = new VoterDAO();
-        Voter voter = dao.login(email, password);
+
+        Voter voter = authService.login(email, password);
+
         if (voter != null) {
             HttpSession session = req.getSession();
             session.setAttribute("voter", voter);
-            resp.sendRedirect("vote.jsp");
+
+            resp.sendRedirect("dashboard.jsp");
         } else {
-            resp.sendRedirect("login.jsp?error=1");
+            req.setAttribute("error", "Invalid login!");
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 }
