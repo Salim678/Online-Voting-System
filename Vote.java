@@ -1,5 +1,5 @@
 
-package com.voting.model;
+package model;
 
 import java.sql.Timestamp;
 
