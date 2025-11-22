@@ -14,10 +14,22 @@ public class Candidate {
         this.party = party;
     }
 
-    public int getCandidateId() { return candidateId; }
-    public void setCandidateId(int candidateId) { this.candidateId = candidateId; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getParty() { return party; }
-    public void setParty(String party) { this.party = party; }
+    public int getCandidateId() { 
+        return candidateId;
+    }
+    public void setCandidateId(int candidateId) {
+        this.candidateId = candidateId;
+    }
+    public String getName() { 
+        return name; 
+    }
+    public void setName(String name) {
+        this.name = name; 
+    v}
+    public String getParty() { 
+        return party; 
+    }
+    public void setParty(String party) { 
+        this.party = party;
+    }
 }
