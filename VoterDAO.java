@@ -1,5 +1,5 @@
 
-package com.voting.dao;
+package dao;
 
 import com.voting.model.Voter;
 import com.voting.util.DBConnection;
