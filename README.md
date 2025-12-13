@@ -92,26 +92,39 @@ The application is designed and implemented according to the Java Web-Based Proj
 
 📁 Project Structure
 
-• src/ – Java source code
-• src/model/ – Entity / model classes
-• src/dao/ – Database access objects (DAO layer)
-• src/service/ – Business logic and validation
-• src/web/ – Servlets and Filters
-• src/util/ – Database connection utility
+▫️ src/ – Java source code
 
-• WebContent/ – JSP pages and UI resources
-• WebContent/admin.jsp – Admin dashboard
-• WebContent/vote.jsp – Voter voting page
-• WebContent/results.jsp – Election results page
-• WebContent/login.jsp – Login page
-• WebContent/register.jsp – Registration page
-• WebContent/index.jsp – Home page
+▫️ src/model/ – Entity / model classes
 
-• database/ – Database scripts
-• database/voting.sql – Initial SQL setup
-• database/voting_db.sql – Normalized schema with constraints
+▫️ src/dao/ – Database access objects (DAO layer)
 
-• README.md – Project documentation
+▫️ src/service/ – Business logic and validation
+
+▫️ src/web/ – Servlets and Filters
+
+▫️ src/util/ – Database connection utility
+
+▫️ WebContent/ – JSP pages and UI resources
+
+▫️ WebContent/admin.jsp – Admin dashboard
+
+▫️ WebContent/vote.jsp – Voter voting page
+
+▫️ WebContent/results.jsp – Election results page
+
+▫️ WebContent/login.jsp – Login page
+
+▫️ WebContent/register.jsp – Registration page
+
+▫️ WebContent/index.jsp – Home page
+
+▫️ database/ – Database scripts
+
+▫️ database/voting.sql – Initial SQL setup
+
+▫️ database/voting_db.sql – Normalized schema with constraints
+
+▫️ README.md – Project documentation
 
 🗄️ Database Design
 
