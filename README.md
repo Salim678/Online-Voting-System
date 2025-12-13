@@ -91,26 +91,27 @@ The application is designed and implemented according to the Java Web-Based Proj
 ▫️This separation improves maintainability, scalability, and code quality.
 
 📁 Project Structure
-src/
- ├── model/        (Entity classes)
- ├── dao/          (Database access objects)
- ├── service/      (Business logic & validation)
- ├── web/          (Servlets & Filters)
- └── util/         (DB connection utility)
 
-WebContent/
- ├── admin.jsp
- ├── vote.jsp
- ├── results.jsp
- ├── login.jsp
- ├── register.jsp
- └── index.jsp
+• src/ – Java source code
+• src/model/ – Entity / model classes
+• src/dao/ – Database access objects (DAO layer)
+• src/service/ – Business logic and validation
+• src/web/ – Servlets and Filters
+• src/util/ – Database connection utility
 
-database/
- ├── voting.sql
- └── voting_db.sql
+• WebContent/ – JSP pages and UI resources
+• WebContent/admin.jsp – Admin dashboard
+• WebContent/vote.jsp – Voter voting page
+• WebContent/results.jsp – Election results page
+• WebContent/login.jsp – Login page
+• WebContent/register.jsp – Registration page
+• WebContent/index.jsp – Home page
 
-README.md
+• database/ – Database scripts
+• database/voting.sql – Initial SQL setup
+• database/voting_db.sql – Normalized schema with constraints
+
+• README.md – Project documentation
 
 🗄️ Database Design
 
