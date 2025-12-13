@@ -20,10 +20,19 @@ public class LoginServlet extends HttpServlet {
         Voter voter = authService.login(email, password);
 
         if (voter != null) {
-            HttpSession session = req.getSession();
+
+            HttpSession session = req.getSession(true);
+
+            session.setAttribute("userId", voter.getId());
+            session.setAttribute("role", voter.getRole());
             session.setAttribute("voter", voter);
 
-            resp.sendRedirect("dashboard.jsp");
+            if ("admin".equalsIgnoreCase(voter.getRole())) {
+                resp.sendRedirect("admin.jsp");
+            } else {
+                resp.sendRedirect("vote.jsp");
+            }
+
         } else {
             req.setAttribute("error", "Invalid login!");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
