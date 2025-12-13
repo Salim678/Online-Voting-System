@@ -1,5 +1,3 @@
-
--- MySQL schema for Online Voting System
 CREATE DATABASE IF NOT EXISTS online_voting;
 USE online_voting;
 
