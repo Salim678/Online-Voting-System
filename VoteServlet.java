@@ -6,6 +6,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
+@WebServlet("/vote")
 public class VoteServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
