@@ -6,6 +6,7 @@ import java.io.IOException;
 import model.Voter;
 import service.AuthService;
 
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     private AuthService authService = new AuthService();
