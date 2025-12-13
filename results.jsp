@@ -1,19 +1,63 @@
+<%@ page import="java.sql.*,com.voting.util.DBConnection,dao.VoteDAO" %>
+<%
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("role") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
 
-<%@ page import="java.sql.*,com.voting.util.DBConnection" %>
-<html><head><title>Results</title></head><body>
-  <h2>Results</h2>
-  <table border="1">
-    <tr><th>Candidate</th><th>Party</th><th>Votes</th></tr>
-    <% 
-      String sql = "SELECT c.name, c.party, COUNT(v.vote_id) as votes FROM candidates c LEFT JOIN votes v ON c.candidate_id=v.candidate_id GROUP BY c.candidate_id";
-      try (Connection con = DBConnection.getConnection();
-           java.sql.PreparedStatement ps = con.prepareStatement(sql);
-           java.sql.ResultSet rs = ps.executeQuery()) {
+    String role = session.getAttribute("role").toString();
+%>
+
+<html>
+<head>
+    <title>Voting Results</title>
+</head>
+<body>
+
+<h2>Election Results</h2>
+
+<table border="1">
+    <tr>
+        <th>Candidate</th>
+        <th>Party</th>
+        <th>Votes</th>
+    </tr>
+
+<%
+    try (Connection con = DBConnection.getConnection();
+         ResultSet rs = VoteDAO.getResults(con)) {
+
         while (rs.next()) {
-          out.println("<tr><td>"+rs.getString("name")+"</td><td>"+rs.getString("party")+"</td><td>"+rs.getInt("votes")+"</td></tr>");
+%>
+        <tr>
+            <td><%= rs.getString("name") %></td>
+            <td><%= rs.getString("party") %></td>
+            <td><%= rs.getInt("votes") %></td>
+        </tr>
+<%
         }
-      } catch (Exception e) { out.println("<tr><td colspan='3'>Error</td></tr>"); }
-    %>
-  </table>
-  <p><a href="vote.jsp">Back to Vote</a></p>
-</body></html>
+    } catch (Exception e) {
+%>
+        <tr>
+            <td colspan="3">Unable to fetch results</td>
+        </tr>
+<%
+    }
+%>
+</table>
+
+<br/>
+
+<%-- Role-based navigation --%>
+<% if ("admin".equalsIgnoreCase(role)) { %>
+    <a href="admin.jsp">Back to Admin Dashboard</a>
+<% } else { %>
+    <a href="vote.jsp">Back to Vote</a>
+<% } %>
+
+<br/><br/>
+<a href="logout">Logout</a>
+
+</body>
+</html>
