@@ -1,43 +1,74 @@
-
 package dao;
-
-import com.voting.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import util.DBConnection;
 
 public class VoteDAO {
 
-    public boolean hasVoted(int voterId, int electionId) {
-        String sql = "SELECT COUNT(*) as cnt FROM votes WHERE voter_id=? AND election_id=?";
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, voterId);
-            ps.setInt(2, electionId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("cnt") > 0;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    public static boolean castVote(int voterId, int candidateId) {
 
-    public boolean castVote(int voterId, int candidateId, int electionId) {
-        String sql = "INSERT INTO votes (voter_id, candidate_id, election_id) VALUES (?,?,?)";
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, voterId);
-            ps.setInt(2, candidateId);
-            ps.setInt(3, electionId);
-            ps.executeUpdate();
+        Connection con = null;
+        PreparedStatement checkStmt = null;
+        PreparedStatement voteStmt = null;
+        PreparedStatement updateVoterStmt = null;
+
+        try {
+            con = DBConnection.getConnection();
+
+            con.setAutoCommit(false);
+
+            String checkQuery = "SELECT has_voted FROM voters WHERE voter_id = ?";
+            checkStmt = con.prepareStatement(checkQuery);
+            checkStmt.setInt(1, voterId);
+
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (!rs.next() || rs.getBoolean("has_voted")) {
+                con.rollback();
+                return false;
+            }
+
+            String voteQuery =
+                "INSERT INTO votes (voter_id, candidate_id) VALUES (?, ?)";
+            voteStmt = con.prepareStatement(voteQuery);
+            voteStmt.setInt(1, voterId);
+            voteStmt.setInt(2, candidateId);
+            voteStmt.executeUpdate();
+
+            String updateVoterQuery =
+                "UPDATE voters SET has_voted = 1 WHERE voter_id = ?";
+            updateVoterStmt = con.prepareStatement(updateVoterQuery);
+            updateVoterStmt.setInt(1, voterId);
+            updateVoterStmt.executeUpdate();
+
+           
+            con.commit();
             return true;
+
         } catch (Exception e) {
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
+            return false;
+
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return false;
     }
 }
