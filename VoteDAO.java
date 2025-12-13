@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import util.DBConnection;
 
 public class VoteDAO {
-
     public static boolean castVote(int voterId, int candidateId) {
 
         Connection con = null;
@@ -21,31 +20,29 @@ public class VoteDAO {
 
             con.setAutoCommit(false);
 
-            String checkQuery = "SELECT has_voted FROM voters WHERE voter_id = ?";
-            checkStmt = con.prepareStatement(checkQuery);
+            String checkSql = "SELECT has_voted FROM voters WHERE voter_id = ?";
+            checkStmt = con.prepareStatement(checkSql);
             checkStmt.setInt(1, voterId);
 
             ResultSet rs = checkStmt.executeQuery();
-
             if (!rs.next() || rs.getBoolean("has_voted")) {
                 con.rollback();
                 return false;
             }
 
-            String voteQuery =
+            String voteSql =
                 "INSERT INTO votes (voter_id, candidate_id) VALUES (?, ?)";
-            voteStmt = con.prepareStatement(voteQuery);
+            voteStmt = con.prepareStatement(voteSql);
             voteStmt.setInt(1, voterId);
             voteStmt.setInt(2, candidateId);
             voteStmt.executeUpdate();
 
-            String updateVoterQuery =
+            String updateVoterSql =
                 "UPDATE voters SET has_voted = 1 WHERE voter_id = ?";
-            updateVoterStmt = con.prepareStatement(updateVoterQuery);
+            updateVoterStmt = con.prepareStatement(updateVoterSql);
             updateVoterStmt.setInt(1, voterId);
             updateVoterStmt.executeUpdate();
 
-           
             con.commit();
             return true;
 
@@ -70,5 +67,16 @@ public class VoteDAO {
                 e.printStackTrace();
             }
         }
+    }
+    public static ResultSet getResults(Connection con) throws Exception {
+
+        String sql =
+            "SELECT c.name, c.party, COUNT(v.vote_id) AS votes " +
+            "FROM candidates c " +
+            "LEFT JOIN votes v ON c.candidate_id = v.candidate_id " +
+            "GROUP BY c.candidate_id";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        return ps.executeQuery();
     }
 }
