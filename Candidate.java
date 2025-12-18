@@ -25,7 +25,7 @@ public class Candidate {
     }
     public void setName(String name) {
         this.name = name; 
-    v}
+    }
     public String getParty() { 
         return party; 
     }
