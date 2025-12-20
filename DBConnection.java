@@ -1,4 +1,3 @@
-
 package com.voting.util;
 
 import java.sql.Connection;
