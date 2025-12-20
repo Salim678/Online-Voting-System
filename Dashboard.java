@@ -1,3 +1,4 @@
+
 <%
     if (session.getAttribute("voter") == null) {
         response.sendRedirect("login.jsp");
