@@ -1,3 +1,4 @@
+
 <form action="register" method="post">
     <h2>Register</h2>
     <input type="text" name="name" placeholder="Name" required><br><br>
