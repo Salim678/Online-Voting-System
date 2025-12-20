@@ -1,4 +1,3 @@
-
 package com.voting.model;
 
 import java.sql.Date;
