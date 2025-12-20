@@ -1,4 +1,3 @@
-
 package com.voting.servlet;
 
 import com.voting.dao.CandidateDAO;
