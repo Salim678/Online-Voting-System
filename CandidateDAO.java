@@ -1,4 +1,3 @@
-
 package com.voting.dao;
 
 import com.voting.model.Candidate;
