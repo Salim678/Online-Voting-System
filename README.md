@@ -198,6 +198,21 @@ Manual testing confirms correct functionality and robustness.
 
 ▫️README documentation maintained for clarity
 
+- Tasks were divided among team members:
+  
+  ▫️ Backend (Servlets & DAO)
+  
+  ▫️ Frontend (JSP & UI)
+  
+  ▫️ Database design
+  
+  ▫️ Documentation & testing
+  
+- Regular discussions were held to integrate modules.
+- Code reviews were conducted to ensure consistency.
+- All members contributed to testing and debugging.
+
+
 📊 Results
 
 ▫️Votes are counted accurately
